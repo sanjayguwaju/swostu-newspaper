@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swostika Shrestha - Full Stack Developer</title>
+    <title>Swostika Shrestha - Quality Assurance Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -89,6 +89,54 @@
 
         .nav-links a:hover {
             color: var(--primary);
+        }
+
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         .hero {
@@ -479,8 +527,48 @@
         }
 
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             .nav-links {
-                gap: 16px;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--bg-white);
+                flex-direction: column;
+                padding: 80px 40px 40px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 100;
+                gap: 24px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                transform: translateX(50px);
+                animation: slideIn 0.3s forwards;
+            }
+
+            .nav-links.active li:nth-child(1) { animation-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { animation-delay: 0.2s; }
+            .nav-links.active li:nth-child(3) { animation-delay: 0.3s; }
+            .nav-links.active li:nth-child(4) { animation-delay: 0.4s; }
+            .nav-links.active li:nth-child(5) { animation-delay: 0.5s; }
+            .nav-links.active li:nth-child(6) { animation-delay: 0.6s; }
+            .nav-links.active li:nth-child(7) { animation-delay: 0.7s; }
+
+            @keyframes slideIn {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
 
             .hero {
@@ -512,6 +600,18 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .experience-timeline::before {
+                left: 20px;
+            }
+
+            .experience-dot {
+                left: 12px;
+            }
+
+            .experience-item {
+                padding-left: 50px;
+            }
         }
 
         .animate-fade-in {
@@ -528,17 +628,237 @@
                 transform: translateY(0);
             }
         }
+
+        /* Enhanced Animations */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .hero-badge {
+            animation: pulse 2s infinite;
+        }
+
+        .skill-icon {
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .experience-dot {
+            animation: pulse 2s infinite;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .logo {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .contact-item {
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .section-badge {
+            transition: all 0.3s ease;
+        }
+
+        .section-header:hover .section-badge {
+            transform: scale(1.1);
+        }
+
+        .project-tag {
+            transition: all 0.3s ease;
+        }
+
+        .project-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        .experience-content {
+            transform: translateX(0);
+        }
+
+        .experience-item:hover .experience-content {
+            transform: translateX(5px);
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation for page */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            animation: slideDown 0.5s ease-out;
+        }
+
+        /* Gradient animation for hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Mobile menu overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Stagger animation for skills */
+        .skill-card {
+            animation: fadeIn 0.6s ease-out backwards;
+        }
+
+        .skill-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-card:nth-child(4) { animation-delay: 0.4s; }
+        .skill-card:nth-child(5) { animation-delay: 0.5s; }
+        .skill-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Project card image animation */
+        .project-image {
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
+    <div class="menu-overlay" id="menuOverlay"></div>
     <header>
         <nav class="container">
             <a href="#" class="logo">Swostika Shrestha</a>
-            <ul class="nav-links">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Testing Skills</a></li>
+                <li><a href="#experience">QA Journey</a></li>
+                <li><a href="#projects">Test Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#tools">QA Tools</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -549,8 +869,8 @@
             <div class="hero-content animate-fade-in">
                 <div class="hero-badge">Available for Opportunities</div>
                 <h1>Hi, I'm Swostika Shrestha</h1>
-                <h2>Full Stack Developer & Problem Solver</h2>
-                <p>After a decade away, I've returned to coding with renewed passion and fresh perspective. I build modern, scalable web applications with clean code and beautiful user experiences.</p>
+                <h2>Quality Assurance Engineer & Testing Specialist</h2>
+                <p>After a decade away, I've returned to tech with renewed passion and fresh perspective. I ensure software quality through comprehensive testing strategies, automation frameworks, and meticulous attention to detail.</p>
                 <div>
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
                     <a href="#projects" class="btn btn-secondary">View My Work</a>
@@ -563,8 +883,8 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">About Me</div>
-                <h2 class="section-title">Hello World, I am becoming a coder again</h2>
-                <p class="section-subtitle">After ten years, I'm back in the development world, combining my past experience with modern technologies to create impactful solutions.</p>
+                <h2 class="section-title">Quality is not an act, it is a habit</h2>
+                <p class="section-subtitle">After ten years, I'm back in the tech world, combining my past experience with modern testing methodologies to ensure exceptional software quality and user satisfaction.</p>
             </div>
         </div>
     </section>
@@ -574,38 +894,38 @@
             <div class="section-header">
                 <div class="section-badge">Skills</div>
                 <h2 class="section-title">What I Bring to the Table</h2>
-                <p class="section-subtitle">Modern technologies and timeless development principles</p>
+                <p class="section-subtitle">Modern testing tools and proven quality assurance methodologies</p>
             </div>
             <div class="skills-grid">
                 <div class="skill-card">
-                    <div class="skill-icon">⚛️</div>
-                    <h3>Frontend Development</h3>
-                    <p>Building responsive, interactive user interfaces with React, TypeScript, and modern CSS frameworks like Tailwind.</p>
+                    <div class="skill-icon">🤖</div>
+                    <h3>Test Automation</h3>
+                    <p>Building robust automation frameworks with Selenium, Cypress, Playwright, and TestNG for efficient regression testing and CI/CD integration.</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">⚙️</div>
-                    <h3>Backend Development</h3>
-                    <p>Creating robust server-side applications with Node.js, Express, and RESTful API design principles.</p>
+                    <h3>API Testing</h3>
+                    <p>Comprehensive API testing using Postman, REST Assured, and automated validation of endpoints, responses, and performance.</p>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">💾</div>
-                    <h3>Database Management</h3>
-                    <p>Designing and optimizing databases with PostgreSQL, MongoDB, and Supabase for efficient data storage.</p>
+                    <div class="skill-icon">📱</div>
+                    <h3>Mobile Testing</h3>
+                    <p>Cross-platform mobile testing with Appium, Espresso, and XCUITest ensuring quality across iOS and Android devices.</p>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h3>UI/UX Design</h3>
-                    <p>Crafting beautiful, intuitive interfaces that prioritize user experience and accessibility.</p>
+                    <div class="skill-icon">⚡</div>
+                    <h3>Performance Testing</h3>
+                    <p>Load and stress testing using JMeter, K6, and Lighthouse to ensure optimal application performance under various conditions.</p>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🚀</div>
-                    <h3>DevOps & Deployment</h3>
-                    <p>Implementing CI/CD pipelines, cloud deployment, and performance optimization strategies.</p>
+                    <div class="skill-icon">🔒</div>
+                    <h3>Security Testing</h3>
+                    <p>Identifying vulnerabilities through OWASP guidelines, penetration testing, and security scanning tools like Burp Suite and OWASP ZAP.</p>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🔧</div>
-                    <h3>Problem Solving</h3>
-                    <p>Analytical thinking and creative solutions to complex technical challenges.</p>
+                    <div class="skill-icon">📊</div>
+                    <h3>Test Management</h3>
+                    <p>Expert in test planning, execution, and defect tracking using Jira, TestRail, and Azure DevOps for complete quality lifecycle management.</p>
                 </div>
             </div>
         </div>
@@ -615,17 +935,17 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">Journey</div>
-                <h2 class="section-title">My Development Journey</h2>
-                <p class="section-subtitle">From past experience to present passion</p>
+                <h2 class="section-title">My Quality Assurance Journey</h2>
+                <p class="section-subtitle">From past experience to present expertise</p>
             </div>
             <div class="experience-timeline">
                 <div class="experience-item">
                     <div class="experience-dot"></div>
                     <div class="experience-content">
                         <div class="experience-date">2025 - Present</div>
-                        <h3>Full Stack Developer</h3>
-                        <div class="experience-company">Returning to Development</div>
-                        <p>Rebuilt my development skills from the ground up, mastering modern frameworks and best practices. Focusing on creating production-ready applications with clean, maintainable code.</p>
+                        <h3>Quality Assurance Engineer</h3>
+                        <div class="experience-company">Returning to Tech</div>
+                        <p>Rebuilt my QA expertise from the ground up, mastering modern testing frameworks, automation tools, and quality methodologies. Leading comprehensive testing strategies for web, mobile, and API applications with focus on continuous quality improvement.</p>
                     </div>
                 </div>
                 <div class="experience-item">
@@ -634,16 +954,94 @@
                         <div class="experience-date">2015 - 2025</div>
                         <h3>Career Hiatus</h3>
                         <div class="experience-company">Personal Development</div>
-                        <p>Took time away from coding to pursue other interests and gain life experience. This decade provided valuable perspective and renewed appreciation for software development.</p>
+                        <p>Took time away from tech to pursue other interests and gain life experience. This decade provided valuable perspective, enhanced problem-solving skills, and renewed appreciation for software quality and user experience.</p>
                     </div>
                 </div>
                 <div class="experience-item">
                     <div class="experience-dot"></div>
                     <div class="experience-content">
                         <div class="experience-date">2010 - 2015</div>
-                        <h3>Early Development Career</h3>
+                        <h3>Early QA Career</h3>
                         <div class="experience-company">Building Foundations</div>
-                        <p>Started my journey in web development, learning core programming concepts and building my first applications. Gained foundational experience that continues to inform my work today.</p>
+                        <p>Started my journey in software testing, learning manual testing methodologies, test case design, and bug tracking. Gained foundational experience in quality assurance principles that continues to inform my work today.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" style="background: var(--bg-white);">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <div class="section-badge">Certifications</div>
+                <h2 class="section-title">Professional Certifications</h2>
+                <p class="section-subtitle">Continuously learning and staying updated with industry standards</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card scroll-animate">
+                    <div class="skill-icon">✓</div>
+                    <h3>ISTQB Certified Tester</h3>
+                    <p>Foundation Level certification demonstrating comprehensive understanding of software testing principles and methodologies.</p>
+                </div>
+                <div class="skill-card scroll-animate">
+                    <div class="skill-icon">🎯</div>
+                    <h3>Certified Agile Tester</h3>
+                    <p>Expertise in agile testing practices, continuous integration, and working within agile development teams.</p>
+                </div>
+                <div class="skill-card scroll-animate">
+                    <div class="skill-icon">🔐</div>
+                    <h3>Security Testing</h3>
+                    <p>Specialized training in OWASP security standards, penetration testing, and vulnerability assessment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <div class="section-badge">Technology Stack</div>
+                <h2 class="section-title">QA Tools & Technologies</h2>
+                <p class="section-subtitle">Comprehensive toolkit for end-to-end quality assurance</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card scroll-animate">
+                    <div class="project-image" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">🧪</div>
+                    <div class="project-content">
+                        <h3>Automation Tools</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Selenium WebDriver</span>
+                            <span class="project-tag">Cypress</span>
+                            <span class="project-tag">Playwright</span>
+                            <span class="project-tag">TestNG</span>
+                            <span class="project-tag">JUnit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card scroll-animate">
+                    <div class="project-image" style="background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);">🛠️</div>
+                    <div class="project-content">
+                        <h3>Testing Frameworks</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Cucumber</span>
+                            <span class="project-tag">Robot Framework</span>
+                            <span class="project-tag">Jest</span>
+                            <span class="project-tag">Mocha</span>
+                            <span class="project-tag">PyTest</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card scroll-animate">
+                    <div class="project-image" style="background: linear-gradient(135deg, #3494e6 0%, #ec6ead 100%);">📊</div>
+                    <div class="project-content">
+                        <h3>Management Tools</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Jira</span>
+                            <span class="project-tag">TestRail</span>
+                            <span class="project-tag">Azure DevOps</span>
+                            <span class="project-tag">Jenkins</span>
+                            <span class="project-tag">Git</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -652,48 +1050,48 @@
 
     <section id="projects">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header scroll-animate">
                 <div class="section-badge">Portfolio</div>
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Showcasing my recent work and capabilities</p>
+                <h2 class="section-title">Featured Testing Projects</h2>
+                <p class="section-subtitle">Showcasing my testing expertise and quality assurance capabilities</p>
             </div>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">🌐</div>
+                <div class="project-card scroll-animate">
+                    <div class="project-image">🤖</div>
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="project-tag">React</span>
-                            <span class="project-tag">TypeScript</span>
-                            <span class="project-tag">Tailwind</span>
+                            <span class="project-tag">Selenium</span>
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Jenkins</span>
                         </div>
-                        <h3>Modern Web Application</h3>
-                        <p>A full-featured web application with responsive design, real-time updates, and seamless user experience.</p>
+                        <h3>E2E Automation Framework</h3>
+                        <p>Comprehensive end-to-end test automation framework with parallel execution, detailed reporting, and CI/CD integration reducing regression testing time by 70%.</p>
                         <a href="#" class="project-link">View Project →</a>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📱</div>
+                <div class="project-card scroll-animate">
+                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📡</div>
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="project-tag">Node.js</span>
-                            <span class="project-tag">Express</span>
-                            <span class="project-tag">PostgreSQL</span>
+                            <span class="project-tag">Postman</span>
+                            <span class="project-tag">REST Assured</span>
+                            <span class="project-tag">JavaScript</span>
                         </div>
-                        <h3>RESTful API Service</h3>
-                        <p>Scalable backend service with authentication, data validation, and comprehensive API documentation.</p>
+                        <h3>API Testing Suite</h3>
+                        <p>Complete API testing solution with automated validation, performance testing, and comprehensive test coverage for RESTful services with detailed Newman reports.</p>
                         <a href="#" class="project-link">View Project →</a>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🎨</div>
+                <div class="project-card scroll-animate">
+                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">⚡</div>
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="project-tag">UI/UX</span>
-                            <span class="project-tag">Design</span>
-                            <span class="project-tag">Prototyping</span>
+                            <span class="project-tag">JMeter</span>
+                            <span class="project-tag">K6</span>
+                            <span class="project-tag">Grafana</span>
                         </div>
-                        <h3>Portfolio Website</h3>
-                        <p>This very website, showcasing modern design principles and smooth animations for an engaging user experience.</p>
+                        <h3>Performance Testing Dashboard</h3>
+                        <p>Real-time performance monitoring dashboard with load testing automation, identifying bottlenecks and ensuring optimal application performance under peak loads.</p>
                         <a href="#" class="project-link">View Project →</a>
                     </div>
                 </div>
@@ -706,7 +1104,7 @@
             <div class="section-header">
                 <div class="section-badge">Get In Touch</div>
                 <h2 class="section-title">Let's Work Together</h2>
-                <p class="section-subtitle">I'm happy to be a developer and excited to collaborate on your next project</p>
+                <p class="section-subtitle">I'm passionate about quality assurance and excited to ensure your software exceeds quality standards</p>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
@@ -724,7 +1122,7 @@
                     </div>
                 </div>
                 <div style="margin-top: 48px;">
-                    <button class="btn btn-primary" onclick="alert('At the End of the day, Swostika Shrestha is my favorite DEVELOPER')">Send Message</button>
+                    <button class="btn btn-primary" onclick="alert('At the End of the day, Swostika Shrestha is my favorite QA ENGINEER')">Send Message</button>
                 </div>
             </div>
         </div>
@@ -732,16 +1130,42 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Swostika Shrestha. Thank you for visiting my website! Swostika Shrestha is my favorite developer.</p>
+            <p>&copy; 2025 Swostika Shrestha. Thank you for visiting my website! Committed to delivering exceptional software quality.</p>
         </div>
     </footer>
 
     <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        menuOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
+                    // Close mobile menu if open
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
@@ -750,21 +1174,114 @@
             });
         });
 
-        const observerOptions = {
+        // Scroll animations
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
-        };
+        });
 
-        const observer = new IntersectionObserver((entries) => {
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // Section fade-in animation
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.animation = 'fadeIn 0.8s ease-in';
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
         document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
+            sectionObserver.observe(section);
+        });
+
+        // Add parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add hover sound effect simulation (visual feedback)
+        document.querySelectorAll('.btn, .project-card, .skill-card').forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+        });
+
+        // Counter animation for stats (if needed in future)
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Add active state to current nav item based on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.style.color = '';
+                if (item.getAttribute('href').slice(1) === current) {
+                    item.style.color = 'var(--primary)';
+                }
+            });
+        });
+
+        // Easter egg - Konami code for QA professionals
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode.splice(-konamiSequence.length - 1, konamiCode.length - konamiSequence.length);
+            
+            if (konamiCode.join('').includes(konamiSequence.join(''))) {
+                document.body.style.animation = 'pulse 0.5s ease-in-out 3';
+                setTimeout(() => {
+                    alert('🎉 Bug detected! Just kidding - this website is quality assured by Swostika Shrestha! 🐛✅');
+                }, 500);
+            }
+        });
+
+        // Page load animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
         });
     </script>
 </body>
