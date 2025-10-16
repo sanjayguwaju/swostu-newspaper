@@ -3,45 +3,769 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Beautiful Website</title>
+    <title>Swostika Shrestha - Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --accent: #10b981;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #d138b0, #fda085);
-            color: #333;
-            padding: 50px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
         }
-        h1 {
-            font-size: 3em;
-            color: #2c3e50;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
-        h3, h4 {
-            font-size: 1.5em;
-            color: #34495e;
+
+        header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.95);
         }
-        button {
-            background-color: #3498db;
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        button:hover {
-            background-color: #2980b9;
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="1" fill="white" opacity="0.1"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-60px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 16px;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: var(--bg-white);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .skill-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .experience-item {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 48px;
+        }
+
+        .experience-dot {
+            position: absolute;
+            left: 32px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid var(--bg-white);
+            box-shadow: 0 0 0 4px var(--border);
+        }
+
+        .experience-content {
+            background: var(--bg-white);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .experience-content:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .experience-date {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .experience-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .experience-company {
+            font-size: 16px;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .experience-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .project-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .project-content {
+            padding: 24px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            background: var(--bg-light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .project-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: gap 0.2s;
+        }
+
+        .project-link:hover {
+            gap: 8px;
+        }
+
+        .contact {
+            background: var(--text-dark);
+            color: white;
+        }
+
+        .contact .section-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            background: #020617;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 32px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 16px;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
-    <h1>First Website after Decade</h1>
-    <h3>Hello World, I am becoming a coder again.</h3>
-    <h4>Hi again, I am back as a coder.</h4>
-    <p>I am happy to be a developer!</p>
-    <button onclick="alert('At the End of the day,Parbat is my favorite DEVELOPER')">Click Here</button>
-    <p>Thank you for visiting my website!</p>
-    <p>Parbat is my favorite developer.</p>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Swostika Shrestha</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate-fade-in">
+                <div class="hero-badge">Available for Opportunities</div>
+                <h1>Hi, I'm Swostika Shrestha</h1>
+                <h2>Full Stack Developer & Problem Solver</h2>
+                <p>After a decade away, I've returned to coding with renewed passion and fresh perspective. I build modern, scalable web applications with clean code and beautiful user experiences.</p>
+                <div>
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#projects" class="btn btn-secondary">View My Work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background: var(--bg-white);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">About Me</div>
+                <h2 class="section-title">Hello World, I am becoming a coder again</h2>
+                <p class="section-subtitle">After ten years, I'm back in the development world, combining my past experience with modern technologies to create impactful solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Skills</div>
+                <h2 class="section-title">What I Bring to the Table</h2>
+                <p class="section-subtitle">Modern technologies and timeless development principles</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">⚛️</div>
+                    <h3>Frontend Development</h3>
+                    <p>Building responsive, interactive user interfaces with React, TypeScript, and modern CSS frameworks like Tailwind.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚙️</div>
+                    <h3>Backend Development</h3>
+                    <p>Creating robust server-side applications with Node.js, Express, and RESTful API design principles.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💾</div>
+                    <h3>Database Management</h3>
+                    <p>Designing and optimizing databases with PostgreSQL, MongoDB, and Supabase for efficient data storage.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Crafting beautiful, intuitive interfaces that prioritize user experience and accessibility.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <h3>DevOps & Deployment</h3>
+                    <p>Implementing CI/CD pipelines, cloud deployment, and performance optimization strategies.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔧</div>
+                    <h3>Problem Solving</h3>
+                    <p>Analytical thinking and creative solutions to complex technical challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background: var(--bg-white);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Journey</div>
+                <h2 class="section-title">My Development Journey</h2>
+                <p class="section-subtitle">From past experience to present passion</p>
+            </div>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-dot"></div>
+                    <div class="experience-content">
+                        <div class="experience-date">2025 - Present</div>
+                        <h3>Full Stack Developer</h3>
+                        <div class="experience-company">Returning to Development</div>
+                        <p>Rebuilt my development skills from the ground up, mastering modern frameworks and best practices. Focusing on creating production-ready applications with clean, maintainable code.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-dot"></div>
+                    <div class="experience-content">
+                        <div class="experience-date">2015 - 2025</div>
+                        <h3>Career Hiatus</h3>
+                        <div class="experience-company">Personal Development</div>
+                        <p>Took time away from coding to pursue other interests and gain life experience. This decade provided valuable perspective and renewed appreciation for software development.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-dot"></div>
+                    <div class="experience-content">
+                        <div class="experience-date">2010 - 2015</div>
+                        <h3>Early Development Career</h3>
+                        <div class="experience-company">Building Foundations</div>
+                        <p>Started my journey in web development, learning core programming concepts and building my first applications. Gained foundational experience that continues to inform my work today.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Portfolio</div>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Showcasing my recent work and capabilities</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">🌐</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">Tailwind</span>
+                        </div>
+                        <h3>Modern Web Application</h3>
+                        <p>A full-featured web application with responsive design, real-time updates, and seamless user experience.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📱</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">Express</span>
+                            <span class="project-tag">PostgreSQL</span>
+                        </div>
+                        <h3>RESTful API Service</h3>
+                        <p>Scalable backend service with authentication, data validation, and comprehensive API documentation.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🎨</div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">UI/UX</span>
+                            <span class="project-tag">Design</span>
+                            <span class="project-tag">Prototyping</span>
+                        </div>
+                        <h3>Portfolio Website</h3>
+                        <p>This very website, showcasing modern design principles and smooth animations for an engaging user experience.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Get In Touch</div>
+                <h2 class="section-title">Let's Work Together</h2>
+                <p class="section-subtitle">I'm happy to be a developer and excited to collaborate on your next project</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <a href="mailto:swostika@example.com">swostika@example.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://linkedin.com/in/swostika" target="_blank">linkedin.com/in/swostika</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>🐙</span>
+                        <a href="https://github.com/swostika" target="_blank">github.com/swostika</a>
+                    </div>
+                </div>
+                <div style="margin-top: 48px;">
+                    <button class="btn btn-primary" onclick="alert('At the End of the day, Swostika Shrestha is my favorite DEVELOPER')">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Swostika Shrestha. Thank you for visiting my website! Swostika Shrestha is my favorite developer.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-in';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
